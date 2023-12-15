@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <AppHeader />
+    <AppHeader @search="handleSearch"/>
 
     <n-divider />
 
@@ -80,7 +80,11 @@ const loadArticles = async (page = 0) => {
   pageInfo.totalPage = res.data.data.totalPage
   console.log(res)
 }
-
+const handleSearch = async (message, categoryId) => {
+  pageInfo.keyword = message;
+  pageInfo.categoryId = categoryId
+  loadArticles();
+}
 //页面跳转
 const toDetail = (article) => {
   router.push({ path: "/detail/" + article.id })
